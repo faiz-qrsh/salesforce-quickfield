@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salesforce QuickField</title>
+    <link rel="icon" type="image/png" href="../logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00a1e0;
+            --primary-dark: #0076a8;
+            --secondary: #ff6b35;
+            --dark: #2d3436;
+            --light: #f5f6fa;
+            --success: #00b894;
+            --warning: #fdcb6e;
+            --danger: #d63031;
+            --gray: #dfe6e9;
+            --dark-gray: #636e72;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            font-size: 28px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        .cta-button {
+            background-color: white;
+            color: var(--primary);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 160px 0;
+            text-align: center;
+            background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url('image.png');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .hero p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            color: var(--dark-gray);
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 161, 224, 0.3);
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #e05a24;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+        }
+
+        /* Features Section */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            color: var(--dark-gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 40px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .feature-card p {
+            color: var(--dark-gray);
+        }
+
+        /* Demo Section */
+        .demo {
+            background-color: var(--light);
+        }
+
+        .demo-container {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .demo-content {
+            flex: 1;
+        }
+
+        .demo-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .demo-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .demo-content h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .demo-content p {
+            margin-bottom: 30px;
+            color: var(--dark-gray);
+        }
+
+        /* How It Works */
+        .steps {
+            counter-reset: step-counter;
+        }
+
+        .step {
+            display: flex;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+
+        .step-number::before {
+            counter-increment: step-counter;
+            content: counter(step-counter);
+        }
+
+        .step-content {
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            flex: 1;
+        }
+
+        .step-content h4 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        /* Benefits */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .benefit-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+
+        .benefit-icon {
+            font-size: 40px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .benefit-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        /* Privacy Section */
+        .privacy {
+            background-color: var(--light);
+        }
+
+        .privacy-content {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .privacy-content h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .privacy-content p {
+            margin-bottom: 20px;
+            color: var(--dark-gray);
+        }
+
+        /* Limitations */
+        .limitations {
+            text-align: center;
+        }
+
+        .limitations-list {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .limitations-list li {
+            margin-bottom: 15px;
+            color: var(--dark-gray);
+        }
+
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            text-align: center;
+            padding: 80px 0;
+        }
+
+        .cta h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .cta p {
+            max-width: 700px;
+            margin: 0 auto 30px;
+            font-size: 18px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 50px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-column ul li a:hover {
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--primary);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .demo-container {
+                flex-direction: column;
+            }
+            
+            .demo-content {
+                order: 2;
+            }
+            
+            .demo-image {
+                order: 1;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate {
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <i class="fas fa-bolt"></i>
+                    <span>QuickField</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#benefits">Benefits</a></li>
+                    <li><a href="#privacy">Privacy</a></li>
+                    <li><a href="#limitations">Limitations</a></li>
+                    <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSeI_y3aUVr4b-lETD9CNdMz4p0rIVILjGQ3uzmxM6DWVuZWGg/viewform?usp=header" target="_blank">Report Bugs</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1 class="animate">Create Salesforce Fields in Seconds</h1>
+            <p class="animate delay-1">QuickField is a powerful Chrome extension that streamlines the process of creating custom fields in Salesforce, saving you hours of manual work.</p>
+            <div class="hero-buttons animate delay-2">
+                <a href="#" class="btn btn-primary">Add to Chrome</a>
+                <a href="#how-it-works" class="btn btn-secondary">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Powerful Features</h2>
+                <p>QuickField provides everything you need to manage Salesforce fields efficiently</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card animate">
+                    <div class="feature-icon">
+                        <i class="fas fa-magic"></i>
+                    </div>
+                    <h3>Bulk Field Creation</h3>
+                    <p>Create multiple custom fields at once with just a few clicks, eliminating repetitive manual work.</p>
+                </div>
+                <div class="feature-card animate delay-1">
+                    <div class="feature-icon">
+                        <i class="fas fa-file-excel"></i>
+                    </div>
+                    <h3>Excel Integration</h3>
+                    <p>Upload field configurations directly from Excel spreadsheets for even faster setup.</p>
+                </div>
+                <div class="feature-card animate delay-3">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-lock"></i>
+                    </div>
+                    <h3>Secure Session Access</h3>
+                    <p>One-click retrieval of your Salesforce session ID for integration with other tools.</p>
+                </div>
+                <div class="feature-card animate">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Profile Visibility</h3>
+                    <p>Option to make fields visible to all profiles during creation with a single checkbox.</p>
+                </div>
+                <div class="feature-card animate delay-1">
+                    <div class="feature-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3>Validation Checks</h3>
+                    <p>Automatic validation of object names and field labels before creation.</p>
+                </div>
+                <div class="feature-card animate delay-2">
+                    <div class="feature-icon">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <h3>Progress Tracking</h3>
+                    <p>Real-time progress updates during field creation with success/failure reporting.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="demo" class="section demo">
+        <div class="container">
+            <div class="demo-container">
+                <div class="demo-content">
+                    <h3>Simple and Intuitive Interface</h3>
+                    <p>QuickField integrates seamlessly with Salesforce, providing a clean and user-friendly interface that makes field creation effortless. Whether you're creating one field or hundreds, the process is streamlined and efficient.</p>
+                    <p>Switch between manual entry and Excel upload modes with a single click, and see real-time validation of your inputs before submission.</p>
+                    <a href="#" class="btn btn-primary">Try It Now</a>
+                </div>
+                <div class="demo-image">
+                    <img src="img/image.png" alt="QuickField Interface">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="how-it-works" class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>How QuickField Works</h2>
+                <p>Get started in minutes and save hours of manual work</p>
+            </div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number"></div>
+                    <div class="step-content">
+                        <h4>Install the Extension</h4>
+                        <p>Add QuickField to your Chrome browser from the Chrome Web Store with just one click.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number"></div>
+                    <div class="step-content">
+                        <h4>Navigate to Salesforce</h4>
+                        <p>Open your Salesforce org where you want to create custom fields.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number"></div>
+                    <div class="step-content">
+                        <h4>Open QuickField</h4>
+                        <p>Click the QuickField icon in your Chrome toolbar to open the extension.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number"></div>
+                    <div class="step-content">
+                        <h4>Configure Your Fields</h4>
+                        <p>Enter the object name, field type, and labels (or upload an Excel file) and click create.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number"></div>
+                    <div class="step-content">
+                        <h4>Monitor Progress</h4>
+                        <p>Watch as QuickField creates your fields and provides a detailed success/failure report.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="benefits" class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Key Benefits</h2>
+                <p>Why administrators and developers love QuickField</p>
+            </div>
+            <div class="benefits-grid">
+                <div class="benefit-card animate">
+                    <div class="benefit-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Save Time</h3>
+                    <p>Reduce field creation time from hours to minutes with bulk operations.</p>
+                </div>
+                <div class="benefit-card animate delay-1">
+                    <div class="benefit-icon">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <h3>Reduce Errors</h3>
+                    <p>Automatic validation prevents mistakes before they happen.</p>
+                </div>
+                <div class="benefit-card animate delay-2">
+                    <div class="benefit-icon">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <h3>Streamline Processes</h3>
+                    <p>Perfect for migrations, new implementations, and large-scale updates.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="privacy" class="section privacy">
+        <div class="container">
+            <div class="section-title">
+                <h2>Privacy & Security</h2>
+                <p>Your data security is our top priority</p>
+            </div>
+            <div class="privacy-content">
+                <h3>Data Handling</h3>
+                <p>QuickField operates entirely within your browser and only communicates with your Salesforce org and our secure backend server for field creation. Your Salesforce session ID is never stored or logged.</p>
+                
+                <h3>Server Processing</h3>
+                <p>For Excel file processing, files are temporarily uploaded to our secure server where they are processed and immediately deleted after field creation is complete.</p>
+                
+                <h3>No Data Retention</h3>
+                <p>We do not store any of your Salesforce data, metadata, or credentials. All processing is done in-memory and no sensitive information is persisted.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="limitations" class="section limitations">
+        <div class="container">
+            <div class="section-title">
+                <h2>Current Limitations</h2>
+                <p>Be aware of these current constraints</p>
+            </div>
+            <div class="limitations-list">
+                <ul>
+                    <li>Only supports custom objects and customizable standard objects</li>
+                    <li>Requires Chrome browser (other browsers not supported yet)</li>
+                    <li>Excel upload only accepts .xlsx format files</li>
+                    <li>Field-level security must be configured separately for non-admin profiles</li>
+                    <li>Currently supports field creation but not updates to existing fields</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to Supercharge Your Salesforce Workflow?</h2>
+            <p>Join hundreds of administrators and developers who save hours every week with QuickField.</p>
+            <a href="#" class="btn btn-secondary">Install QuickField Now</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Salesforce QuickField</h3>
+                    <p>The fastest way to create custom fields in Salesforce.</p>
+                    <div class="social-links">
+                        <a href="https://x.com/Faiz_qrsh" target="_blank"><i class="fab fa-x"></i></a>
+                        <a href="https://github.com/faiz-qrsh" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/mohdfaizqureshi/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Product</h3>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#benefits">Benefits</a></li>
+                        <li><a href="#privacy">Privacy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 QuickField. All rights reserved. Not affiliated with Salesforce.com.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple animation on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const animateElements = document.querySelectorAll('.animate');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animated');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            animateElements.forEach(element => {
+                observer.observe(element);
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
