@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Salesforce QuickField</title>
-    <link rel="icon" type="image/png" href="../logo.png">
+    <link rel="icon" type="image/png" href="img/logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -33,6 +33,35 @@
             color: var(--dark);
             background-color: #f9f9f9;
         }
+
+        .method-options {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 40px;
+    }
+    
+    .method-box {
+        flex: 1;
+        padding: 20px;
+        border: 1px solid #e1e1e1;
+        border-radius: 8px;
+        background: #f9f9f9;
+    }
+    
+    .method-box h3 {
+        margin-top: 0;
+        color: #2a5bd7;
+    }
+    
+    .method-icon {
+        margin-right: 10px;
+    }
+    
+    .download-template {
+        color: #2a5bd7;
+        font-weight: 400;
+        text-decoration: none;
+    }
 
         .container {
             max-width: 1200px;
@@ -520,7 +549,7 @@
             <h1 class="animate">Create Salesforce Fields in Seconds</h1>
             <p class="animate delay-1">QuickField is a powerful Chrome extension that streamlines the process of creating custom fields in Salesforce, saving you hours of manual work.</p>
             <div class="hero-buttons animate delay-2">
-                <a href="#" class="btn btn-primary">Add to Chrome</a>
+                <a href="https://chromewebstore.google.com/detail/salesforce-quickfield/ncooachkcmnpppafhnjdnaeipnklbopk" class="btn btn-primary">Add to Chrome</a>
                 <a href="#how-it-works" class="btn btn-secondary">Learn More</a>
             </div>
         </div>
@@ -626,14 +655,35 @@
                 <div class="step">
                     <div class="step-number"></div>
                     <div class="step-content">
-                        <h4>Configure Your Fields</h4>
-                        <p>Enter the object name, field type, and labels (or upload an Excel file) and click create.</p>
+                        <h4>Choose a method</h4>
+                        <div class="method-options">
+            <div class="method-box">
+                <h3><span class="method-icon">📝</span> Manual Method</h3>
+                <p><strong>Create multiple fields of the same type:</strong></p>
+                <ul style="margin-left: 20px;">
+                    <li>Enter comma-separated field labels (e.g., "Field1, Field2, Field3")</li>
+                    <li>Select one field type that applies to all fields</li>
+                    <li>Configure common settings once</li>
+                </ul>
+            </div>
+
+            <div class="method-box">
+                <h3><span class="method-icon">📊</span> Excel Upload Method</h3>
+                <p><strong>Create fields with different types/settings:</strong></p>
+                <ul style="margin-left: 20px;">
+                    <li>Prepare an Excel file with columns for labels and types</li>
+                    <li>Include additional configuration columns as needed</li>
+                    <li>Upload to process varied fields in one batch</li>
+                </ul>
+                <p><a href="QuickField Sample.xlsx" class="download-template">Download Excel Template</a></p>
+            </div>
+        </div>
                     </div>
                 </div>
                 <div class="step">
                     <div class="step-number"></div>
                     <div class="step-content">
-                        <h4>Monitor Progress</h4>
+                        <h4>Click Create & Monitor Progress</h4>
                         <p>Watch as QuickField creates your fields and provides a detailed success/failure report.</p>
                     </div>
                 </div>
@@ -713,8 +763,8 @@
     <section class="cta">
         <div class="container">
             <h2>Ready to Supercharge Your Salesforce Workflow?</h2>
-            <p>Join hundreds of administrators and developers who save hours every week with QuickField.</p>
-            <a href="#" class="btn btn-secondary">Install QuickField Now</a>
+            <p>Join hundreds of administrators and developers who save hours every week with Salesforce QuickField.</p>
+            <a href="https://chromewebstore.google.com/detail/salesforce-quickfield/ncooachkcmnpppafhnjdnaeipnklbopk" class="btn btn-secondary">Install QuickField Now</a>
         </div>
     </section>
 
