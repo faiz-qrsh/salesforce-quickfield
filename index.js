@@ -14,19 +14,14 @@ const allowedOrigins = [
   'https://quickfield-server.onrender.com',
 ];
 
+const cors = require('cors');
+
 app.use(cors({
-  origin: function (origin, callback) {
-    // Allow requests with no origin (like curl, mobile apps, etc.)
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.includes(origin)) {
-      return callback(null, true);
-    }
-    return callback(new Error('Not allowed by CORS'));
-  },
-  methods: ['GET', 'POST'],
-  allowedHeaders: ['Content-Type'],
-  credentials: true
+  origin: '*', // or be more specific with ['chrome-extension://ncooachkcmnpppafhnjdnaeipnklbopk']
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
+app.options('*', cors()); 
 
 app.use(bodyParser.json());
 const PORT = process.env.PORT || 3000;
