@@ -9,7 +9,25 @@ const JSZip = require('jszip');
 const { XMLBuilder } = require('fast-xml-parser');
 
 const app = express();
-app.use(cors());
+const allowedOrigins = [
+  'chrome-extension://ncooachkcmnpppafhnjdnaeipnklbopk',
+  'https://quickfield-server.onrender.com',
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like curl, mobile apps, etc.)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    return callback(new Error('Not allowed by CORS'));
+  },
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type'],
+  credentials: true
+}));
+
 app.use(bodyParser.json());
 const PORT = process.env.PORT || 3000;
 let results = [];
