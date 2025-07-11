@@ -9,15 +9,7 @@ const JSZip = require('jszip');
 const { XMLBuilder } = require('fast-xml-parser');
 
 const app = express();
-const corsOptions = {
-  origin: [
-    "chrome-extension://ncooachkcmnpppafhnjdnaeipnklbopk", // Replace with your actual extension ID
-    "https://quickfield-server.onrender.com"       // Your Render.com URL
-  ],
-  methods: ["GET", "POST", "OPTIONS"],
-};
-app.use(cors(corsOptions));
-app.options("*", cors());
+app.use(cors());
 app.use(bodyParser.json());
 const PORT = process.env.PORT || 3000;
 let results = [];
