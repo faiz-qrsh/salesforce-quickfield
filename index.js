@@ -14,14 +14,15 @@ const allowedOrigins = [
   'https://quickfield-server.onrender.com',
 ];
 
-const cors = require('cors');
-
-app.use(cors({
-  origin: '*', // or be more specific with ['chrome-extension://ncooachkcmnpppafhnjdnaeipnklbopk']
+const corsOptions = {
+  origin: 'chrome-extension://ncooachkcmnpppafhnjdnaeipnklbopk', // Your extension ID
   methods: ['GET', 'POST', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
-}));
-app.options('*', cors()); 
+  allowedHeaders: ['Content-Type'],
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 
 app.use(bodyParser.json());
 const PORT = process.env.PORT || 3000;
