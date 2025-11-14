@@ -378,7 +378,7 @@ async function createSalesforceField(baseUrl, sessionId, field) {
     case "Number":
     case "Percent":
     case "Currency":
-      fieldXml += `<met:precision>${field.precision || 18}</met:precision><met:scale>${field.scale || 0}</met:scale>`;
+      fieldXml += `<met:precision>${field.precision || 16}</met:precision><met:scale>${field.scale || 2}</met:scale>`;
       break;
     case "Checkbox":
       fieldXml += `<met:defaultValue>${field.defaultValue || "false"}</met:defaultValue>`;
